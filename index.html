@@ -1,1009 +1,427 @@
 <!DOCTYPE html>
 <html lang="en-AU">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tradies Websites | Professional Websites for Australian Trades</title>
-    <meta name="description" content="Get more jobs with a professional website for your trade business. Fast turnaround, affordable pricing, Australian owned and operated.">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-
-    <script src="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.0.3"></script>
-
-    <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-        :root {
-            --primary: #1A1A2E;
-            --secondary: #16213E;
-            --accent: #F59E0B;
-            --accent-hover: #D97706;
-            --bg: #0F0F1A;
-            --surface: #1E1E30;
-            --text: #FFFFFF;
-            --text-muted: #94A3B8;
-            --success: #10B981;
-            --radius: 16px;
-            --radius-sm: 8px;
-        }
-
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; line-height: 1.2; }
-        h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); }
-        h2 { font-size: clamp(2rem, 4vw, 3rem); }
-        h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); }
-
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-
-        a { color: inherit; text-decoration: none; }
-        img { max-width: 100%; display: block; }
-
-        .btn {
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            padding: 16px 32px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 600;
-            font-size: 1rem;
-            border-radius: var(--radius-sm);
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s ease-out;
-        }
-        .btn-primary {
-            background: var(--accent);
-            color: var(--primary);
-            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3);
-        }
-        .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 6px 30px rgba(245, 158, 11, 0.4); }
-        .btn-primary:active { transform: scale(0.98); }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--accent);
-            border: 2px solid var(--accent);
-        }
-        .btn-secondary:hover { background: var(--accent); color: var(--primary); }
-
-        .btn-small { padding: 12px 24px; font-size: 0.9rem; }
-
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3); }
-            50% { box-shadow: 0 4px 30px rgba(245, 158, 11, 0.5); }
-        }
-        .btn-pulse { animation: pulse 2s ease-in-out infinite; }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate { opacity: 0; }
-        .animate.visible { animation: fadeUp 0.6s ease-out forwards; }
-
-        /* Navigation */
-        nav {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-            padding: 20px 0;
-            transition: all 0.3s ease;
-        }
-        nav.scrolled { background: rgba(15, 15, 26, 0.95); backdrop-filter: blur(10px); padding: 12px 0; }
-        nav .container { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.5rem; display: flex; align-items: center; gap: 8px; }
-        .logo img { height: 80px; width: auto; }
-        .logo { display: flex; align-items: center; }
-        .logo i { color: var(--accent); }
-
-        .nav-cta { display: flex; gap: 16px; align-items: center; }
-        .nav-links { display: flex; gap: 32px; }
-        .nav-links a { font-weight: 500; transition: color 0.2s; }
-        .nav-links a:hover { color: var(--accent); }
-
-        .mobile-toggle { display: none; background: none; border: none; color: var(--text); font-size: 1.5rem; cursor: pointer; }
-
-        .mobile-menu {
-            display: none;
-        }
-
-        /* Hero */
-        .hero {
-            min-height: 100vh;
-            display: flex; align-items: center;
-            padding: 120px 0 80px;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero {
-            background: url('images/hero-tradies.png') center center / cover no-repeat;
-        }
-        .hero::before {
-            content: '';
-            position: absolute; inset: 0;
-            background: linear-gradient(135deg, rgba(15, 15, 26, 0.82) 40%, rgba(15, 15, 26, 0.55) 100%);
-            pointer-events: none;
-        }
-        .hero::after {
-            content: '';
-            position: absolute; inset: 0;
-            background: radial-gradient(ellipse at 80% 50%, rgba(245, 158, 11, 0.06) 0%, transparent 60%);
-            pointer-events: none;
-        }
-        .hero-content { position: relative; z-index: 1; max-width: 800px; }
-        .hero-badge {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: rgba(245, 158, 11, 0.1);
-            border: 1px solid rgba(245, 158, 11, 0.3);
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-size: 0.875rem;
-            color: var(--accent);
-            margin-bottom: 24px;
-        }
-        .hero h1 { margin-bottom: 24px; }
-        .hero h1 span { color: var(--accent); }
-        .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 600px; margin-bottom: 40px; }
-        .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
-
-        /* Trust Bar */
-        .trust-bar {
-            background: var(--surface);
-            padding: 40px 0;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        .trust-items {
-            display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
-            text-align: center;
-        }
-        .trust-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-        .trust-number {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--accent);
-        }
-        .trust-label { color: var(--text-muted); font-size: 0.9rem; }
-
-        /* Problem/Solution */
-        .problem-solution { padding: 100px 0; }
-        .ps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-        .ps-content h2 { margin-bottom: 24px; }
-        .ps-content h2 span { color: var(--accent); }
-        .ps-content p { color: var(--text-muted); margin-bottom: 24px; }
-        .ps-list { list-style: none; }
-        .ps-list li { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px; }
-        .ps-list i { color: var(--accent); margin-top: 4px; flex-shrink: 0; }
-        .ps-visual {
-            background: var(--surface);
-            border-radius: var(--radius);
-            padding: 40px;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-        .ps-visual-stat { text-align: center; padding: 20px; }
-        .ps-visual-stat .number { font-family: 'Space Grotesk', sans-serif; font-size: 4rem; font-weight: 700; color: var(--accent); }
-        .ps-visual-stat .label { color: var(--text-muted); }
-
-        /* Portfolio */
-        .portfolio { padding: 100px 0; background: var(--primary); }
-        .section-header { text-align: center; margin-bottom: 60px; }
-        .section-header h2 { margin-bottom: 16px; }
-        .section-header p { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
-        .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-        .portfolio-card {
-            background: var(--surface);
-            border-radius: var(--radius);
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: all 0.3s ease;
-        }
-        .portfolio-card:hover { transform: translateY(-8px); border-color: rgba(245, 158, 11, 0.3); }
-        .portfolio-preview {
-            position: relative;
-            aspect-ratio: 16/10;
-            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
-            overflow: hidden;
-        }
-        .portfolio-overlay {
-            position: absolute; inset: 0;
-            background: rgba(245, 158, 11, 0.9);
-            display: flex; align-items: center; justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .portfolio-card:hover .portfolio-overlay { opacity: 1; }
-        .portfolio-overlay span { color: var(--primary); font-weight: 600; display: flex; align-items: center; gap: 8px; }
-        .portfolio-info { padding: 24px; }
-        .portfolio-category { color: var(--accent); font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
-        .portfolio-name { font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; margin-top: 8px; }
-
-        /* Pricing */
-        .pricing { padding: 100px 0; }
-        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 60px; }
-        .pricing-card {
-            background: var(--surface);
-            border-radius: var(--radius);
-            padding: 40px;
-            border: 1px solid rgba(255,255,255,0.05);
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        .pricing-card:hover { transform: translateY(-4px); }
-        .pricing-card.featured {
-            border-color: var(--accent);
-            transform: scale(1.02);
-        }
-        .pricing-card.featured:hover { transform: scale(1.02) translateY(-4px); }
-        .pricing-badge {
-            position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-            background: var(--accent); color: var(--primary);
-            padding: 6px 16px; border-radius: 50px;
-            font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
-        }
-        .pricing-header { text-align: center; padding-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 24px; }
-        .pricing-name { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; margin-bottom: 8px; }
-        .pricing-desc { color: var(--text-muted); font-size: 0.9rem; }
-        .pricing-price { margin: 24px 0; text-align: center; }
-        .pricing-price .amount { font-family: 'Space Grotesk', sans-serif; font-size: 3.5rem; font-weight: 700; }
-        .pricing-price .currency { font-size: 1.5rem; vertical-align: super; }
-        .pricing-price .period { color: var(--text-muted); }
-        .pricing-features { list-style: none; margin-bottom: 32px; flex-grow: 1; }
-        .pricing-features li { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px; color: var(--text-muted); }
-        .pricing-features li i { color: var(--success); margin-top: 3px; flex-shrink: 0; }
-        .pricing-features li.disabled { opacity: 0.5; }
-        .pricing-features li.disabled i { color: var(--text-muted); }
-        .pricing-card .btn { width: 100%; }
-
-        /* Process */
-        .process { padding: 100px 0; background: var(--surface); }
-        .process-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 60px; position: relative; }
-        .process-steps::before {
-            content: ''; position: absolute; top: 60px; left: 15%; right: 15%; height: 2px;
-            background: linear-gradient(90deg, var(--accent), var(--accent-hover));
-            opacity: 0.3;
-        }
-        .process-step { text-align: center; position: relative; }
-        .process-icon {
-            width: 80px; height: 80px;
-            background: var(--primary);
-            border: 2px solid var(--accent);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 24px;
-            position: relative; z-index: 1;
-        }
-        .process-icon i { font-size: 2rem; color: var(--accent); }
-        .process-step h3 { margin-bottom: 12px; }
-        .process-step p { color: var(--text-muted); }
-
-        /* Testimonials */
-        .testimonials { padding: 100px 0; }
-        .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 60px; }
-        .testimonial-card {
-            background: var(--surface);
-            border-radius: var(--radius);
-            padding: 32px;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-        .testimonial-stars { color: var(--accent); display: flex; gap: 4px; margin-bottom: 16px; }
-        .testimonial-text { font-size: 1.1rem; margin-bottom: 24px; line-height: 1.7; }
-        .testimonial-author { display: flex; align-items: center; gap: 16px; }
-        .testimonial-avatar {
-            width: 48px; height: 48px;
-            background: var(--accent);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700; color: var(--primary);
-        }
-        .testimonial-name { font-weight: 600; }
-        .testimonial-trade { color: var(--text-muted); font-size: 0.9rem; }
-
-        /* FAQ */
-        .faq { padding: 100px 0; background: var(--surface); }
-        .faq-list { max-width: 800px; margin: 60px auto 0; }
-        .faq-item { border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .faq-question {
-            width: 100%; background: none; border: none;
-            padding: 24px 0; cursor: pointer;
-            display: flex; justify-content: space-between; align-items: center;
-            color: var(--text); font-size: 1.1rem; font-weight: 600;
-            text-align: left;
-            transition: color 0.2s;
-        }
-        .faq-question:hover { color: var(--accent); }
-        .faq-question i { transition: transform 0.3s ease; }
-        .faq-item.active .faq-question i { transform: rotate(45deg); }
-        .faq-answer {
-            max-height: 0; overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-        }
-        .faq-item.active .faq-answer { max-height: 300px; padding-bottom: 24px; }
-        .faq-answer p { color: var(--text-muted); line-height: 1.7; }
-
-        /* Final CTA */
-        .final-cta {
-            padding: 120px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .final-cta::before {
-            content: '';
-            position: absolute; inset: 0;
-            background: radial-gradient(ellipse at center, rgba(245, 158, 11, 0.1) 0%, transparent 70%);
-            pointer-events: none;
-        }
-        .final-cta h2 { margin-bottom: 24px; }
-        .final-cta p { color: var(--text-muted); font-size: 1.25rem; max-width: 600px; margin: 0 auto 40px; }
-
-        /* Contact Modal */
-        .modal-overlay {
-            position: fixed; inset: 0; z-index: 2000;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(8px);
-            display: flex; align-items: center; justify-content: center;
-            opacity: 0; visibility: hidden;
-            transition: all 0.3s ease;
-        }
-        .modal-overlay.active { opacity: 1; visibility: visible; }
-        .modal {
-            background: var(--surface);
-            border-radius: var(--radius);
-            padding: 48px;
-            max-width: 500px; width: 90%;
-            max-height: 90vh; overflow-y: auto;
-            transform: translateY(20px);
-            transition: transform 0.3s ease;
-        }
-        .modal-overlay.active .modal { transform: translateY(0); }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
-        .modal-header h3 { font-size: 1.5rem; }
-        .modal-close {
-            background: none; border: none; color: var(--text-muted);
-            font-size: 1.5rem; cursor: pointer; transition: color 0.2s;
-        }
-        .modal-close:hover { color: var(--text); }
-
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 500; }
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%; padding: 14px 16px;
-            background: var(--primary);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: var(--radius-sm);
-            color: var(--text);
-            font-size: 1rem;
-            font-family: inherit;
-            transition: border-color 0.2s;
-        }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-            outline: none; border-color: var(--accent);
-        }
-        .form-group textarea { resize: vertical; min-height: 100px; }
-        .form-group select { cursor: pointer; }
-        .form-success {
-            text-align: center; padding: 40px 0;
-            display: none;
-        }
-        .form-success i { font-size: 4rem; color: var(--success); margin-bottom: 16px; }
-        .form-success h4 { font-size: 1.5rem; margin-bottom: 8px; }
-        .form-success p { color: var(--text-muted); }
-
-        /* Footer */
-        footer {
-            background: var(--primary);
-            padding: 60px 0 40px;
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 40px; }
-        .footer-brand .logo { margin-bottom: 16px; }
-        .footer-brand .logo img { height: 64px; }
-        .footer-brand p { color: var(--text-muted); max-width: 300px; }
-        .footer-col h4 { margin-bottom: 20px; color: var(--text-muted); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 1px; }
-        .footer-col ul { list-style: none; }
-        .footer-col li { margin-bottom: 12px; }
-        .footer-col a { color: var(--text-muted); transition: color 0.2s; }
-        .footer-col a:hover { color: var(--accent); }
-        .footer-bottom {
-            padding-top: 40px;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            display: flex; justify-content: space-between; align-items: center;
-            color: var(--text-muted); font-size: 0.875rem;
-        }
-        .footer-australian { display: flex; align-items: center; gap: 8px; }
-
-        /* Mobile Responsive */
-        @media (max-width: 968px) {
-            .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 60px auto 0; }
-            .pricing-card.featured { transform: none; }
-            .pricing-card.featured:hover { transform: translateY(-4px); }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .mobile-toggle { display: block; }
-            .nav-cta .btn { display: none; }
-            .mobile-menu { display: block; }
-
-            .trust-items { grid-template-columns: repeat(2, 1fr); }
-            .ps-grid { grid-template-columns: 1fr; }
-            .ps-visual { order: -1; }
-            .portfolio-grid { grid-template-columns: 1fr; }
-            .process-steps { grid-template-columns: 1fr; }
-            .process-steps::before { display: none; }
-            .testimonials-grid { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
-            .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
-
-            .mobile-menu {
-                position: fixed; top: 0; right: -100%; width: 80%; max-width: 300px;
-                height: 100vh; background: var(--surface);
-                padding: 80px 32px 32px;
-                transition: right 0.3s ease;
-                z-index: 999;
-            }
-            .mobile-menu.active { right: 0; }
-            .mobile-menu a { display: block; padding: 16px 0; font-size: 1.1rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
-            .mobile-menu .btn { margin-top: 24px; width: 100%; }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tradie Websites | Simple websites for Australian tradies</title>
+  <meta name="description" content="A clean, mobile-friendly website for tradies. $599 setup plus $59/month, live in 5 business days. Hosting, SSL and form delivery handled.">
+  <meta property="og:title" content="Tradie Websites | Websites for tradies">
+  <meta property="og:description" content="Get a simple, mobile-friendly website live in 5 business days. $599 setup + $59/month.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/images/hero-tradies.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #111827;
+      --muted: #5b6472;
+      --bg: #f7f3ea;
+      --paper: #fffaf0;
+      --card: #ffffff;
+      --line: #e7dcc9;
+      --dark: #182033;
+      --accent: #e59b20;
+      --accent-dark: #b86f00;
+      --green: #16794d;
+      --shadow: 0 24px 70px rgba(24, 32, 51, .14);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.55;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(247, 243, 234, .88);
+      border-bottom: 1px solid rgba(24, 32, 51, .08);
+    }
+    .nav-inner {
+      height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -.04em;
+      font-size: 1.2rem;
+    }
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      background: var(--dark);
+      color: var(--accent);
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      box-shadow: inset 0 -4px 0 rgba(255,255,255,.08);
+    }
+    .nav-links { display: flex; gap: 24px; align-items: center; font-weight: 650; color: #384152; font-size: .94rem; }
+    .btn {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-radius: 999px;
+      padding: 13px 20px;
+      font-weight: 800;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--accent); color: #17120a; box-shadow: 0 14px 32px rgba(229, 155, 32, .32); }
+    .btn-primary:hover { background: #f0aa2c; }
+    .btn-secondary { background: #fff; border-color: var(--line); color: var(--dark); }
+    .hero {
+      padding: 78px 0 64px;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(229,155,32,.20), transparent 26%),
+        linear-gradient(180deg, #fbf4e5 0%, var(--bg) 100%);
+      overflow: hidden;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 54px; align-items: center; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      border: 1px solid rgba(24,32,51,.12);
+      background: rgba(255,255,255,.65);
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: #4b5563;
+      font-weight: 750;
+      font-size: .88rem;
+    }
+    .eyebrow::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--green); }
+    h1 {
+      margin: 24px 0 18px;
+      max-width: 760px;
+      font-size: clamp(3rem, 6vw, 5.7rem);
+      line-height: .94;
+      letter-spacing: -.075em;
+    }
+    .hero-copy { font-size: clamp(1.1rem, 1.7vw, 1.35rem); color: var(--muted); max-width: 620px; }
+    .hero-copy strong { color: var(--ink); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 32px 0 22px; }
+    .microcopy { color: #6b7280; font-size: .95rem; }
+    .proof-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+    .proof-pill { background: rgba(255,255,255,.72); border: 1px solid var(--line); border-radius: 999px; padding: 9px 13px; font-weight: 750; color: #334155; }
+    .hero-card {
+      position: relative;
+      border-radius: 34px;
+      background: var(--dark);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      transform: rotate(1deg);
+    }
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -18px -18px auto auto;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: var(--accent);
+      z-index: -1;
+      opacity: .75;
+    }
+    .mock-browser { background: #f9fafb; border-radius: 24px; overflow: hidden; border: 1px solid rgba(255,255,255,.16); }
+    .browser-top { height: 44px; background: #e5e7eb; display: flex; align-items: center; gap: 7px; padding: 0 16px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: #9ca3af; }
+    .mock-page { padding: 24px; background: #fff; color: #111827; }
+    .mock-tag { display: inline-block; background: #dcfce7; color: #166534; font-weight: 800; font-size: .77rem; padding: 6px 10px; border-radius: 999px; }
+    .mock-title { font-size: 2rem; line-height: 1; letter-spacing: -.055em; font-weight: 900; margin: 14px 0 10px; }
+    .mock-photo { height: 160px; border-radius: 18px; overflow: hidden; background: #ddd; margin: 18px 0; }
+    .mock-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .mock-cta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .mock-btn { background: var(--accent); border-radius: 12px; padding: 13px; text-align: center; font-weight: 850; }
+    .mock-btn.dark { background: var(--dark); color: #fff; }
+    section { padding: 76px 0; }
+    .section-heading { max-width: 760px; margin-bottom: 34px; }
+    .section-kicker { color: var(--accent-dark); text-transform: uppercase; letter-spacing: .12em; font-size: .78rem; font-weight: 900; }
+    h2 { margin: 8px 0 12px; font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.02; letter-spacing: -.055em; }
+    .section-heading p { color: var(--muted); font-size: 1.08rem; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: 0 14px 38px rgba(24,32,51,.06);
+    }
+    .card h3 { margin: 0 0 9px; font-size: 1.22rem; letter-spacing: -.025em; }
+    .card p { color: var(--muted); margin: 0; }
+    .number { width: 38px; height: 38px; border-radius: 12px; background: #f7d89b; color: #5f3500; display: grid; place-items: center; font-weight: 900; margin-bottom: 18px; }
+    .offer-wrap { display: grid; grid-template-columns: .95fr 1.05fr; gap: 22px; align-items: stretch; }
+    .price-card {
+      background: var(--dark);
+      color: #fff;
+      border-radius: 30px;
+      padding: 34px;
+      box-shadow: var(--shadow);
+    }
+    .price-card .label { color: #f3c46e; font-weight: 900; text-transform: uppercase; letter-spacing: .1em; font-size: .78rem; }
+    .price { display: flex; align-items: end; gap: 8px; margin: 16px 0; }
+    .price strong { font-size: clamp(3.2rem, 7vw, 5rem); letter-spacing: -.07em; line-height: .9; }
+    .price span { color: #cbd5e1; padding-bottom: 8px; font-weight: 700; }
+    .small-price { color: #e5e7eb; font-weight: 800; font-size: 1.25rem; margin-bottom: 22px; }
+    .included { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 13px; }
+    .included li { display: flex; gap: 10px; color: #edf2f7; }
+    .included li::before { content: "✓"; color: #86efac; font-weight: 900; }
+    .plain-list { display: grid; gap: 14px; }
+    .plain-item { display: flex; gap: 12px; padding: 18px; border-radius: 18px; background: rgba(255,255,255,.68); border: 1px solid var(--line); }
+    .plain-item strong { display: block; margin-bottom: 2px; }
+    .plain-item span { color: var(--muted); }
+    .tick { color: var(--green); font-weight: 900; }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 42px; align-items: start; }
+    .dark-band { background: var(--dark); color: #fff; }
+    .dark-band .section-kicker { color: #f3c46e; }
+    .dark-band p, .dark-band .muted { color: #cbd5e1; }
+    .fit-list { display: grid; gap: 14px; }
+    .fit { padding: 20px; border: 1px solid rgba(255,255,255,.12); border-radius: 20px; background: rgba(255,255,255,.05); }
+    .fit strong { color: #fff; display: block; margin-bottom: 5px; }
+    .process { counter-reset: step; display: grid; gap: 14px; }
+    .process-item { display: grid; grid-template-columns: 54px 1fr; gap: 16px; align-items: start; padding: 22px; border-radius: 20px; background: #fff; border: 1px solid var(--line); }
+    .process-item::before { counter-increment: step; content: counter(step); width: 54px; height: 54px; border-radius: 16px; display: grid; place-items: center; background: var(--dark); color: var(--accent); font-weight: 900; font-size: 1.25rem; }
+    .faq { display: grid; gap: 12px; }
+    details { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px; }
+    summary { cursor: pointer; font-weight: 850; }
+    details p { color: var(--muted); margin-bottom: 0; }
+    .cta {
+      background: linear-gradient(135deg, #1b2438, #111827);
+      color: #fff;
+      border-radius: 34px;
+      padding: clamp(32px, 6vw, 58px);
+      display: grid;
+      grid-template-columns: 1fr .9fr;
+      gap: 32px;
+      align-items: center;
+      box-shadow: var(--shadow);
+    }
+    .cta h2 { margin-top: 0; }
+    .cta p { color: #cbd5e1; }
+    form { display: grid; gap: 12px; }
+    input, select, textarea {
+      width: 100%;
+      min-height: 48px;
+      padding: 13px 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 14px;
+      background: rgba(255,255,255,.09);
+      color: #fff;
+      font: inherit;
+    }
+    input::placeholder, textarea::placeholder { color: #aeb8c8; }
+    select option { color: #111827; }
+    textarea { min-height: 104px; resize: vertical; }
+    .form-note { color: #cbd5e1; font-size: .88rem; }
+    footer { padding: 34px 0; color: #6b7280; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 22px; }
+    @media (max-width: 880px) {
+      .nav-links a:not(.btn) { display: none; }
+      .hero-grid, .offer-wrap, .split, .cta { grid-template-columns: 1fr; }
+      .cards { grid-template-columns: 1fr; }
+      .hero { padding-top: 42px; }
+      .hero-card { transform: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"LocalBusiness","name":"Tradie Websites","url":"https://tradiewebsites.com","areaServed":"Australia","description":"Simple mobile-friendly websites for tradies, with hosting, SSL and form delivery handled."}
+  </script>
 </head>
 <body>
-    <nav id="navbar">
-        <div class="container">
-            <a href="#" class="logo">
-                <img src="images/Tradie Websites.png" alt="Tradies Websites">
-            </a>
-            <div class="nav-links">
-                <a href="#portfolio">Examples</a>
-                <a href="#pricing">Pricing</a>
-                <a href="#process">How It Works</a>
-                <a href="#faq">FAQ</a>
-            </div>
-            <div class="nav-cta">
-                <button class="btn btn-primary btn-small" onclick="openModal()">Get My Website</button>
-            </div>
-            <button class="mobile-toggle" onclick="toggleMobileMenu()">
-                <i class="ph ph-list"></i>
-            </button>
-        </div>
-    </nav>
-
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="#portfolio" onclick="toggleMobileMenu()">Examples</a>
-        <a href="#pricing" onclick="toggleMobileMenu()">Pricing</a>
-        <a href="#process" onclick="toggleMobileMenu()">How It Works</a>
-        <a href="#faq" onclick="toggleMobileMenu()">FAQ</a>
-        <button class="btn btn-primary" onclick="openModal(); toggleMobileMenu();">Get My Website</button>
+  <nav class="nav" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a href="#top" class="brand" aria-label="Tradie Websites home"><span class="brand-mark">TW</span><span>Tradie Websites</span></a>
+      <div class="nav-links">
+        <a href="#offer">Offer</a>
+        <a href="#fit">Who it fits</a>
+        <a href="#faq">FAQ</a>
+        <a class="btn btn-primary" href="#contact">Get started</a>
+      </div>
     </div>
+  </nav>
 
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-badge animate">
-                    <i class="ph ph-australian"></i>
-                    100% Australian Owned & Operated
-                </div>
-                <h1 class="animate">More Jobs. Less Time.<br><span>Your Website Sorted.</span></h1>
-                <p class="animate">Professional websites for tradies — delivered in 7 days, no tech headaches. Get more customers and grow your business the smart way.</p>
-                <div class="hero-buttons animate">
-                    <button class="btn btn-primary btn-pulse" onclick="openModal()">
-                        <i class="ph ph-rocket-launch"></i>
-                        Get My Website
-                    </button>
-                    <a href="#portfolio" class="btn btn-secondary">
-                        <i class="ph ph-eye"></i>
-                        See Examples
-                    </a>
-                </div>
-            </div>
+  <main id="top">
+    <header class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Simple websites for Australian tradies</span>
+          <h1>Your tradie website, sorted.</h1>
+          <p class="hero-copy">A clean, mobile-friendly website that tells people what you do, where you work, and how to request a quote. <strong>$599 setup + $59/month.</strong> No marketing-guru nonsense.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact">Start my website</a>
+            <a class="btn btn-secondary" href="#offer">See what’s included</a>
+          </div>
+          <p class="microcopy">Built for sole traders and small crews who need a credible web presence without a full agency project.</p>
+          <div class="proof-row" aria-label="Key inclusions">
+            <span class="proof-pill">Live in 5 business days</span>
+            <span class="proof-pill">Hosting + SSL handled</span>
+            <span class="proof-pill">Quote form delivery</span>
+          </div>
         </div>
+        <div class="hero-card" aria-label="Example website preview">
+          <div class="mock-browser">
+            <div class="browser-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+            <div class="mock-page">
+              <span class="mock-tag">Example tradie website</span>
+              <div class="mock-title">Cronulla Plumbing & Gas</div>
+              <p>Blocked drains, hot water, gas fitting and emergency plumbing across the Sutherland Shire.</p>
+              <div class="mock-photo"><img src="/images/hero-tradies.png" alt="Tradie working on site"></div>
+              <div class="mock-cta"><div class="mock-btn">Call now</div><div class="mock-btn dark">Request quote</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section id="problem">
+      <div class="container">
+        <div class="section-heading">
+          <span class="section-kicker">The job it does</span>
+          <h2>A simple website with a proper enquiry path.</h2>
+          <p>Most small trade businesses do not need a big site to start. They need a page that makes them look real, works on mobile, and gives customers an easy next step.</p>
+        </div>
+        <div class="cards">
+          <div class="card"><div class="number">1</div><h3>Shows you’re legitimate</h3><p>Services, area, photos, license/trust notes and contact details in one clean place.</p></div>
+          <div class="card"><div class="number">2</div><h3>Makes quoting easier</h3><p>A simple form captures job type, suburb, urgency and photos so enquiries are less vague.</p></div>
+          <div class="card"><div class="number">3</div><h3>Stays low maintenance</h3><p>Static, fast, hosted properly, with SSL and basic keep-it-working checks included.</p></div>
+        </div>
+      </div>
     </section>
 
-    <section class="trust-bar">
-        <div class="container">
-            <div class="trust-items">
-                <div class="trust-item animate">
-                    <span class="trust-number" style="color: var(--accent);">Fixed Price</span>
-                    <span class="trust-label">No Hidden Fees</span>
-                </div>
-                <div class="trust-item animate">
-                    <span class="trust-number" data-count="7">0</span>
-                    <span class="trust-label">Day Turnaround</span>
-                </div>
-                <div class="trust-item animate">
-                    <span class="trust-number" style="color: var(--success);">100%</span>
-                    <span class="trust-label">Satisfaction Guaranteed</span>
-                </div>
-                <div class="trust-item animate">
-                    <span class="trust-number">100%</span>
-                    <span class="trust-label">Australian Owned</span>
-                </div>
-            </div>
+    <section id="offer">
+      <div class="container offer-wrap">
+        <div class="price-card">
+          <div class="label">Tradie Website Starter</div>
+          <div class="price"><strong>$599</strong><span>setup</span></div>
+          <div class="small-price">+ $59/month care plan</div>
+          <p class="muted">A focused one-page web presence for tradies who have no site, a weak site, or a messy contact path.</p>
+          <ul class="included">
+            <li>One mobile-friendly website</li>
+            <li>Call, email and quote request buttons</li>
+            <li>Simple quote/enquiry form</li>
+            <li>Service area and trade-specific copy</li>
+            <li>Hosting, SSL and form delivery handled</li>
+            <li>Basic uptime / keep-it-working checks</li>
+          </ul>
         </div>
+        <div class="plain-list">
+          <div class="plain-item"><span class="tick">✓</span><div><strong>Built in 5 business days</strong><span>Once we have your basic details, we build and send you a preview before going live.</span></div></div>
+          <div class="plain-item"><span class="tick">✓</span><div><strong>No website platform for you to manage</strong><span>No WordPress updates, plugins, or drag-and-drop builder to learn.</span></div></div>
+          <div class="plain-item"><span class="tick">✓</span><div><strong>Plain English setup</strong><span>You send business details and photos. We turn that into a clear, useful page.</span></div></div>
+          <div class="plain-item"><span class="tick">✓</span><div><strong>Starter Plus available</strong><span>$899 setup + $59/month if you also want a simple Logo Reboot bundled in.</span></div></div>
+        </div>
+      </div>
     </section>
 
-    <section class="problem-solution">
-        <div class="container">
-            <div class="ps-grid">
-                <div class="ps-content">
-                    <h2 class="animate">Standing Out in a <span>Crowded Market</span></h2>
-                    <p class="animate">Every tradie knows the struggle. You've got the skills, but getting new customers? That's the hard part. While your competitors are still relying on word-of-mouth, you could be dominating Google searches in your area.</p>
-                    <ul class="ps-list animate">
-                        <li><i class="ph ph-check-circle"></i> Customers Google "best electrician near me" daily</li>
-                        <li><i class="ph ph-check-circle"></i> 87% of people won't call a business without a website</li>
-                        <li><i class="ph ph-check-circle"></i> A professional website = instant credibility and trust</li>
-                        <li><i class="ph ph-check-circle"></i> Stop losing jobs to competitors with better online presence</li>
-                    </ul>
-                </div>
-                <div class="ps-visual animate">
-                    <div class="ps-visual-stat">
-                        <div class="number">87%</div>
-                        <div class="label">of customers search online before hiring a tradie</div>
-                    </div>
-                </div>
-            </div>
+    <section id="fit" class="dark-band">
+      <div class="container split">
+        <div class="section-heading">
+          <span class="section-kicker">Who it fits</span>
+          <h2>This is for simple, trust-first web presence.</h2>
+          <p>We are not pretending every tradie needs the same thing. If you already have a strong site, we will say so.</p>
         </div>
+        <div class="fit-list">
+          <div class="fit"><strong>Best fit: no website or weak web presence</strong><span class="muted">You rely on Google, Facebook, directories, referrals or an old broken site.</span></div>
+          <div class="fit"><strong>Maybe fit: decent site, weak enquiry path</strong><span class="muted">You may be better suited to an enquiry-path refresh instead of the Starter.</span></div>
+          <div class="fit"><strong>Not fit: already strong site</strong><span class="muted">If your site is clear, fast and already brings good enquiries, you probably do not need this.</span></div>
+        </div>
+      </div>
     </section>
 
-    <section class="portfolio" id="portfolio">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="animate">What Your Website <span>Could Look Like</span></h2>
-                <p class="animate">Professional designs tailored to your trade. Here are some examples of the style and quality you can expect.</p>
-            </div>
-            <div class="portfolio-grid">
-                <div class="portfolio-card animate">
-                    <div class="portfolio-preview">
-                        <img src="images/Electrician.png" alt="Electrician Website" style="width:100%;height:100%;object-fit:cover;">
-                        <div class="portfolio-overlay">
-                            <span><i class="ph ph-arrow-square-out"></i> View Website</span>
-                        </div>
-                    </div>
-                    <div class="portfolio-info">
-                        <div class="portfolio-category">Electrical</div>
-                        <div class="portfolio-name">Electrical Template</div>
-                    </div>
-                </div>
-                <div class="portfolio-card animate">
-                    <div class="portfolio-preview">
-                        <img src="images/Plumber.png" alt="Plumber Website" style="width:100%;height:100%;object-fit:cover;">
-                        <div class="portfolio-overlay">
-                            <span><i class="ph ph-arrow-square-out"></i> Preview</span>
-                        </div>
-                    </div>
-                    <div class="portfolio-info">
-                        <div class="portfolio-category">Plumbing</div>
-                        <div class="portfolio-name">Plumbing Template</div>
-                    </div>
-                </div>
-                <div class="portfolio-card animate">
-                    <div class="portfolio-preview">
-                        <img src="images/Aircon.png" alt="Air Conditioning Website" style="width:100%;height:100%;object-fit:cover;">
-                        <div class="portfolio-overlay">
-                            <span><i class="ph ph-arrow-square-out"></i> Preview</span>
-                        </div>
-                    </div>
-                    <div class="portfolio-info">
-                        <div class="portfolio-category">Air Conditioning</div>
-                        <div class="portfolio-name">Air Con Template</div>
-                    </div>
-                </div>
-            </div>
+    <section id="process">
+      <div class="container split">
+        <div>
+          <span class="section-kicker">Process</span>
+          <h2>Simple enough to actually finish.</h2>
+          <p class="section-heading">The point is to get you a useful page live without turning it into a three-month branding project.</p>
         </div>
+        <div class="process">
+          <div class="process-item"><div><h3>Send your details</h3><p>Trade, service areas, phone, email, ABN/licence if relevant, and a few job photos if you have them.</p></div></div>
+          <div class="process-item"><div><h3>We build the preview</h3><p>You get a draft page to check for accuracy. One sensible revision pass is included.</p></div></div>
+          <div class="process-item"><div><h3>Go live</h3><p>We connect the domain, hosting, SSL and form delivery. Your page is live and ready to share.</p></div></div>
+        </div>
+      </div>
     </section>
 
-    <section class="pricing" id="pricing">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="animate">Simple, <span>Transparent Pricing</span></h2>
-                <p class="animate">No hidden fees, no surprises. Pick a package that fits your business and we'll have your website live in days.</p>
-            </div>
-            <div class="pricing-grid">
-                <div class="pricing-card animate">
-                    <div class="pricing-header">
-                        <div class="pricing-name">Essential</div>
-                        <div class="pricing-desc">Perfect for getting started online</div>
-                    </div>
-                    <div class="pricing-price">
-                        <span class="currency">$</span><span class="amount">1,497</span>
-                    </div>
-                    <ul class="pricing-features">
-                        <li><i class="ph ph-check"></i> Single page website</li>
-                        <li><i class="ph ph-check"></i> Mobile responsive design</li>
-                        <li><i class="ph ph-check"></i> Contact form integration</li>
-                        <li><i class="ph ph-check"></i> Business Google Map</li>
-                        <li><i class="ph ph-check"></i> 5-day delivery</li>
-                        <li class="disabled"><i class="ph ph-minus"></i> Multiple pages</li>
-                        <li class="disabled"><i class="ph ph-minus"></i> Online booking</li>
-                        <li class="disabled"><i class="ph ph-minus"></i> Google Ads setup</li>
-                    </ul>
-                    <button class="btn btn-secondary" onclick="openModal('Essential')">Get Started</button>
-                </div>
-
-                <div class="pricing-card featured animate">
-                    <div class="pricing-badge">Recommended</div>
-                    <div class="pricing-header">
-                        <div class="pricing-name">Professional</div>
-                        <div class="pricing-desc">Best value for growing businesses</div>
-                    </div>
-                    <div class="pricing-price">
-                        <span class="currency">$</span><span class="amount">2,497</span>
-                    </div>
-                    <ul class="pricing-features">
-                        <li><i class="ph ph-check"></i> Up to 5 pages</li>
-                        <li><i class="ph ph-check"></i> Mobile responsive design</li>
-                        <li><i class="ph ph-check"></i> Contact form integration</li>
-                        <li><i class="ph ph-check"></i> Business Google Map</li>
-                        <li><i class="ph ph-check"></i> Social media links</li>
-                        <li><i class="ph ph-check"></i> Basic SEO setup</li>
-                        <li><i class="ph ph-check"></i> 7-day delivery</li>
-                        <li class="disabled"><i class="ph ph-minus"></i> Online booking</li>
-                        <li class="disabled"><i class="ph ph-minus"></i> Google Ads setup</li>
-                    </ul>
-                    <button class="btn btn-primary" onclick="openModal('Professional')">Get Started</button>
-                </div>
-
-                <div class="pricing-card animate">
-                    <div class="pricing-header">
-                        <div class="pricing-name">Business</div>
-                        <div class="pricing-desc">Complete solution for established businesses</div>
-                    </div>
-                    <div class="pricing-price">
-                        <span class="currency">$</span><span class="amount">3,997</span>
-                    </div>
-                    <ul class="pricing-features">
-                        <li><i class="ph ph-check"></i> Up to 10 pages</li>
-                        <li><i class="ph ph-check"></i> Mobile responsive design</li>
-                        <li><i class="ph ph-check"></i> Contact form integration</li>
-                        <li><i class="ph ph-check"></i> Business Google Map</li>
-                        <li><i class="ph ph-check"></i> Social media links</li>
-                        <li><i class="ph ph-check"></i> Advanced SEO setup</li>
-                        <li><i class="ph ph-check"></i> Online booking system</li>
-                        <li><i class="ph ph-check"></i> Photo gallery</li>
-                        <li><i class="ph ph-check"></i> Google Ads setup</li>
-                        <li><i class="ph ph-check"></i> Priority support</li>
-                        <li><i class="ph ph-check"></i> 14-day delivery</li>
-                    </ul>
-                    <button class="btn btn-secondary" onclick="openModal('Business')">Get Started</button>
-                </div>
-            </div>
+    <section id="faq">
+      <div class="container split">
+        <div class="section-heading">
+          <span class="section-kicker">FAQ</span>
+          <h2>Common questions.</h2>
+          <p>No complicated packages. No fake “limited time” pressure.</p>
         </div>
+        <div class="faq">
+          <details open><summary>Is this a full website?</summary><p>It is a focused starter website, built around trust and enquiries instead of unnecessary pages. That is the point: fast to build, easy to understand, and low maintenance.</p></details>
+          <details><summary>What does the $59/month cover?</summary><p>Hosting, SSL, form delivery, basic uptime/keep-it-working checks and keeping the website online. Ongoing edits are quoted separately unless we add a higher care tier later.</p></details>
+          <details><summary>Can I use my own domain?</summary><p>Yes. We can connect your existing domain or help you choose one if you do not have one yet.</p></details>
+          <details><summary>What if I already have a site?</summary><p>If your site is decent, we will not pitch you “you need a website”. You may be a better fit for an enquiry-path refresh.</p></details>
+          <details><summary>Do you do logos?</summary><p>Yes, as a simple Logo Reboot add-on. It is a cleanup or simple wordmark, not a full brand identity project.</p></details>
+        </div>
+      </div>
     </section>
 
-    <section class="process" id="process">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="animate">3 Simple <span>Steps</span></h2>
-                <p class="animate">From inquiry to live website in as little as 7 days. No tech knowledge needed.</p>
-            </div>
-            <div class="process-steps">
-                <div class="process-step animate">
-                    <div class="process-icon"><i class="ph ph-hand-pointing"></i></div>
-                    <h3>Choose Your Package</h3>
-                    <p>Pick the tier that fits your business needs and budget. We'll guide you through the options.</p>
-                </div>
-                <div class="process-step animate">
-                    <div class="process-icon"><i class="ph ph-code"></i></div>
-                    <h3>We Build It</h3>
-                    <p>I'll create your website with your branding, photos, and content. You just approve the design.</p>
-                </div>
-                <div class="process-step animate">
-                    <div class="process-icon"><i class="ph ph-rocket-launch"></i></div>
-                    <h3>Go Live</h3>
-                    <p>Your website goes live and you start getting more customers. It's that simple.</p>
-                </div>
-            </div>
+    <section id="contact">
+      <div class="container">
+        <div class="cta">
+          <div>
+            <span class="section-kicker">Start here</span>
+            <h2>Want the simple version first?</h2>
+            <p>Send the basics. We will check whether the Starter fits, or whether you are better suited to an enquiry-path refresh instead.</p>
+            <p class="microcopy">Draft form for now — we’ll wire this to Cloudflare Worker form handling before deployment.</p>
+          </div>
+          <form action="#" method="post" onsubmit="event.preventDefault(); this.querySelector('.form-note').textContent='Thanks — form wiring is being added before launch.';">
+            <input name="name" autocomplete="name" placeholder="Your name" required>
+            <input name="business" autocomplete="organization" placeholder="Business name" required>
+            <input name="phone" autocomplete="tel" placeholder="Phone number" required>
+            <input name="email" autocomplete="email" type="email" placeholder="Email address">
+            <select name="situation" required>
+              <option value="">What best describes you?</option>
+              <option>No website yet</option>
+              <option>Old or weak website</option>
+              <option>Decent site, but enquiries are messy</option>
+              <option>Not sure</option>
+            </select>
+            <textarea name="message" placeholder="What trade are you in and where do you work?"></textarea>
+            <button class="btn btn-primary" type="submit">Check if I’m a fit</button>
+            <div class="form-note">No spam. No automated outreach list. Just enough detail to check fit.</div>
+          </form>
         </div>
+      </div>
     </section>
+  </main>
 
-    <section class="testimonials">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="animate">Our <span>Promise to You</span></h2>
-                <p class="animate">We're serious about getting it right. Here's what you can count on when you work with us.</p>
-            </div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card animate">
-                    <div style="font-size: 2.5rem; color: var(--accent); margin-bottom: 16px;">
-                        <i class="ph ph-shield-check"></i>
-                    </div>
-                    <h3 style="margin-bottom: 12px;">100% Satisfaction Guaranteed</h3>
-                    <p class="testimonial-text">We don't stop until you're happy. Unlimited revisions on every package means your website will look exactly how you want it — no exceptions.</p>
-                </div>
-                <div class="testimonial-card animate">
-                    <div style="font-size: 2.5rem; color: var(--accent); margin-bottom: 16px;">
-                        <i class="ph ph-currency-dollar"></i>
-                    </div>
-                    <h3 style="margin-bottom: 12px;">Fixed Price, No Surprises</h3>
-                    <p class="testimonial-text">The price you see is the price you pay. No hidden fees, no upsells, no ongoing contracts. Just a great website at a fair price.</p>
-                </div>
-                <div class="testimonial-card animate">
-                    <div style="font-size: 2.5rem; color: var(--accent); margin-bottom: 16px;">
-                        <i class="ph ph-headset"></i>
-                    </div>
-                    <h3 style="margin-bottom: 12px;">Local Support, Real People</h3>
-                    <p class="testimonial-text">We're Australian owned and operated. When you need help, you'll talk to a real person who understands your business — not a chatbot overseas.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="faq" id="faq">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="animate">Got <span>Questions?</span></h2>
-                <p class="animate">Everything you need to know before getting started.</p>
-            </div>
-            <div class="faq-list">
-                <div class="faq-item animate">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>I'm not tech-savvy — will I be able to update it?</span>
-                        <i class="ph ph-plus"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Absolutely. We build websites that are easy to update through a simple dashboard. No coding required — if you can use email, you can update your website. Plus, we include a tutorial video showing you how to make common updates.</p>
-                    </div>
-                </div>
-                <div class="faq-item animate">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>Do you do trades outside website building?</span>
-                        <i class="ph ph-plus"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Nope, we're specialists in one thing — building websites for tradies. That focus means your site will be purpose-built for your industry, with the features and design that tradie businesses actually need.</p>
-                    </div>
-                </div>
-                <div class="faq-item animate">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>What if I don't like the design?</span>
-                        <i class="ph ph-plus"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>We offer unlimited revisions until you're 100% happy. Before we build anything, we discuss your preferences, look at your competitors, and create a design brief. You're involved at every step, so surprises are rare.</p>
-                    </div>
-                </div>
-                <div class="faq-item animate">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>How long does it take?</span>
-                        <i class="ph ph-plus"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Essential packages are delivered in 5 days, Professional in 7 days, and Business in 14 days. These timelines start once we have your content (photos, business info, etc.) and you'll be involved in quick approval steps along the way.</p>
-                    </div>
-                </div>
-                <div class="faq-item animate">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>Do you offer ongoing support?</span>
-                        <i class="ph ph-plus"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Yes! All our packages include 30 days of free support after launch. For ongoing needs, we offer affordable monthly maintenance plans that cover updates, backups, and security — so you can focus on your trade, not your website.</p>
-                    </div>
-                </div>
-                <div class="faq-item animate">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>What payments do you accept?</span>
-                        <i class="ph ph-plus"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>We accept credit cards, bank transfers, and offer payment plans for packages over $2,000. A 50% deposit is required to begin work, with the balance due upon completion. No hidden fees, no surprises.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="final-cta">
-        <div class="container">
-            <h2 class="animate">Ready to <span>Grow Your Business?</span></h2>
-                <p class="animate">A professional website is the first step to getting more customers and growing your trade business.</p>
-            <button class="btn btn-primary btn-pulse animate" onclick="openModal()">
-                <i class="ph ph-rocket-launch"></i>
-                Get My Website Today
-            </button>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <div class="logo">
-                        <img src="images/Tradie Websites.png" alt="Tradies Websites">
-                    </div>
-                    <p>Professional websites for Australian tradies. Fast, affordable, and built to get you more jobs.</p>
-                </div>
-                <div class="footer-col">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#portfolio">Examples</a></li>
-                        <li><a href="#pricing">Pricing</a></li>
-                        <li><a href="#process">How It Works</a></li>
-                        <li><a href="#faq">FAQ</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Contact</h4>
-                    <ul>
-                        <li><a href="mailto:hello@tradieswebsites.com.au">hello@tradieswebsites.com.au</a></li>
-                        <li><a href="tel:1800874633">1800 TRADES (1800 872 337)</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <span>© 2026 Tradies Websites. All rights reserved.</span>
-                <div class="footer-australian">
-                    <i class="ph ph-flag"></i>
-                    Proudly Australian Owned & Operated
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <div class="modal-overlay" id="modalOverlay" onclick="closeModalOnOverlay(event)">
-        <div class="modal">
-            <div class="modal-header">
-                <h3>Get Your Website</h3>
-                <button class="modal-close" onclick="closeModal()"><i class="ph ph-x"></i></button>
-            </div>
-            <form id="contactForm" onsubmit="handleSubmit(event)">
-                <div class="form-group">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" name="name" required placeholder="John Smith">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" required placeholder="john@example.com">
-                </div>
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" required placeholder="0412 345 678">
-                </div>
-                <div class="form-group">
-                    <label for="business">Business Type</label>
-                    <select id="business" name="business" required>
-                        <option value="">Select your trade...</option>
-                        <option value="electrical">Electrical</option>
-                        <option value="plumbing">Plumbing</option>
-                        <option value="air-conditioning">Air Conditioning</option>
-                        <option value="carpentry">Carpentry</option>
-                        <option value="painting">Painting</option>
-                        <option value="roofing">Roofing</option>
-                        <option value="landscaping">Landscaping</option>
-                        <option value="flooring">Flooring</option>
-                        <option value="tiling">Tiling</option>
-                        <option value="concreting">Concreting</option>
-                        <option value="bricklaying">Bricklaying</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="package">Interested Package</label>
-                    <select id="package" name="package">
-                        <option value="">Not sure yet</option>
-                        <option value="Essential">Essential — $1,497</option>
-                        <option value="Professional">Professional — $2,497</option>
-                        <option value="Business">Business — $3,997</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">
-                    <i class="ph ph-paper-plane-tilt"></i>
-                    Send Enquiry
-                </button>
-            </form>
-            <div class="form-success" id="formSuccess">
-                <i class="ph ph-check-circle"></i>
-                <h4>Thanks for your enquiry!</h4>
-                <p>We'll be in touch within 24 hours to discuss your website needs.</p>
-            </div>
-        </div>
+  <footer>
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Tradie Websites. Australian owned.</div>
+      <div>Simple websites for tradies.</div>
     </div>
-
-    <script>
-        function openModal(package) {
-            document.getElementById('modalOverlay').classList.add('active');
-            document.body.style.overflow = 'hidden';
-            if (package) {
-                document.getElementById('package').value = package;
-            }
-        }
-
-        function closeModal() {
-            document.getElementById('modalOverlay').classList.remove('active');
-            document.body.style.overflow = '';
-            document.getElementById('contactForm').reset();
-            document.getElementById('contactForm').style.display = '';
-            document.getElementById('formSuccess').style.display = 'none';
-        }
-
-        function closeModalOnOverlay(e) {
-            if (e.target === document.getElementById('modalOverlay')) {
-                closeModal();
-            }
-        }
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeModal();
-        });
-
-        function toggleMobileMenu() {
-            document.getElementById('mobileMenu').classList.toggle('active');
-        }
-
-        function toggleFaq(el) {
-            const item = el.parentElement;
-            item.classList.toggle('active');
-        }
-
-        function handleSubmit(e) {
-            e.preventDefault();
-            document.getElementById('contactForm').style.display = 'none';
-            document.getElementById('formSuccess').style.display = 'block';
-        }
-
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
-
-        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.classList.add('visible');
-                    }, index * 80);
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.animate').forEach(el => observer.observe(el));
-
-        function animateCount(el) {
-            const target = parseInt(el.dataset.count);
-            const duration = 2000;
-            const start = performance.now();
-            function update(currentTime) {
-                const elapsed = currentTime - start;
-                const progress = Math.min(elapsed / duration, 1);
-                const eased = 1 - Math.pow(1 - progress, 3);
-                el.textContent = Math.round(target * eased) + '-Day';
-                if (progress < 1) requestAnimationFrame(update);
-            }
-            requestAnimationFrame(update);
-        }
-
-        const countObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && entry.target.dataset.count) {
-                    animateCount(entry.target);
-                    countObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        document.querySelectorAll('.trust-number[data-count]').forEach(el => countObserver.observe(el));
-    </script>
+  </footer>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
