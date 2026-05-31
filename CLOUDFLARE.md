@@ -54,9 +54,29 @@ Cloudflare Pages should connect to:
 - `index.html` — static site
 - `images/` — static assets
 - `_headers` — security/cache headers
-- `_redirects` — redirect `tradieswebsites.com` to `tradiewebsites.com`
+- `_redirects` — internal path redirects (currently empty)
+- `functions/api/submit.js` — Pages Function (contact form handler)
 
-## Later
+## Contact Form Worker
 
-Add a Worker for contact form submissions after the static site is live.
-Keep the first deployment simple: static Pages first, form handling second.
+The form at `https://tradiewebsites.com/#contact` posts to `/api/submit`, which is handled by the Pages Function at `functions/api/submit.js`.
+
+To enable email delivery:
+
+1. **Sign up at [resend.com](https://resend.com)** (free tier: 100 emails/month).
+2. **Add `tradiewebsites.com` as a verified domain** in Resend (DNS TXT record).
+3. **Create a Resend API key**.
+4. **Add it as a Cloudflare Pages secret:**
+   - Cloudflare dashboard → Pages → `tradiewebsites` → Settings → Environment variables (secrets)
+   - Key: `RESEND_API_KEY`
+   - Value: your Resend API key
+   - Scope: Production
+5. **Optionally add a notification email:**
+   - Same place, add `NOTIFICATION_EMAIL` = the email address that should receive form submissions
+   - Defaults to `hello@tradiewebsites.com` if not set
+
+When `RESEND_API_KEY` is not configured, the form still accepts submissions but logs them to Cloudflare Pages logs without sending an email.
+
+Alternative email methods (if you prefer not to use Resend):
+- **Cloudflare Email Routing:** Enable Email Routing for tradiewebsites.com, set up `hello@tradiewebsites.com` → your inbox, then replace the `fetch()` call in the Worker with `env.SEND_EMAIL.send()` and add the binding in Pages settings.
+- **Gmail REST API:** Use your existing Google credentials with the Gmail API.

@@ -391,9 +391,9 @@
             <span class="section-kicker">Start here</span>
             <h2>Want the simple version first?</h2>
             <p>Send the basics. We will check whether the Starter fits, or whether you are better suited to an enquiry-path refresh instead.</p>
-            <p class="microcopy">Draft form for now — we’ll wire this to Cloudflare Worker form handling before deployment.</p>
+            <p class="microcopy">We&rsquo;ll get back to you within 1 business day.</p>
           </div>
-          <form action="#" method="post" onsubmit="event.preventDefault(); this.querySelector('.form-note').textContent='Thanks — form wiring is being added before launch.';">
+          <form action="/api/submit" method="post" onsubmit="document.querySelector('#submit-btn').disabled=true;document.querySelector('#submit-btn').textContent='Sending...';">
             <input name="name" autocomplete="name" placeholder="Your name" required>
             <input name="business" autocomplete="organization" placeholder="Business name" required>
             <input name="phone" autocomplete="tel" placeholder="Phone number" required>
@@ -406,9 +406,43 @@
               <option>Not sure</option>
             </select>
             <textarea name="message" placeholder="What trade are you in and where do you work?"></textarea>
-            <button class="btn btn-primary" type="submit">Check if I’m a fit</button>
-            <div class="form-note">No spam. No automated outreach list. Just enough detail to check fit.</div>
+            <button class="btn btn-primary" type="submit" id="submit-btn">Check if I&rsquo;m a fit</button>
+            <div class="form-note" id="form-status">No spam. No automated outreach list. Just enough detail to check fit.</div>
           </form>
+          <script>
+            document.querySelector('#contact form').addEventListener('submit', async function(e) {
+              e.preventDefault();
+              var btn = document.getElementById('submit-btn');
+              var status = document.getElementById('form-status');
+              btn.disabled = true;
+              btn.textContent = 'Sending...';
+              try {
+                var res = await fetch('/api/submit', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({
+                    name: this.name.value,
+                    business: this.business.value,
+                    phone: this.phone.value,
+                    email: this.email.value,
+                    situation: this.situation.value,
+                    message: this.message.value
+                  })
+                });
+                var data = await res.json();
+                if (res.ok && data.ok) {
+                  status.textContent = 'Thanks! We will review your details and get back to you within 1 business day.';
+                  this.querySelectorAll('input,select,textarea').forEach(function(el) { el.value = ''; });
+                } else {
+                  status.textContent = data.error || 'Something went wrong. Please try again or email us directly.';
+                }
+              } catch(e) {
+                status.textContent = 'Connection error. Please try again or email us directly.';
+              }
+              btn.disabled = false;
+              btn.textContent = 'Check if I&rsquo;m a fit';
+            });
+          </script>
         </div>
       </div>
     </section>
