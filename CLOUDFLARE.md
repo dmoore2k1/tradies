@@ -17,10 +17,12 @@ Attach these custom domains:
 
 - `tradiewebsites.com` — primary
 - `www.tradiewebsites.com` — optional, redirect to apex if Cloudflare offers it
-- `tradieswebsites.com` — redirect alias via `_redirects`
+- `tradieswebsites.com` — redirect alias via Cloudflare Bulk Redirects or registrar redirect, not `_redirects`
 - `www.tradieswebsites.com` — optional alias
 
-Both domains should use Cloudflare nameservers or be active zones in the same account.
+Both domains should use Cloudflare nameservers or be active zones in the same account before attaching them to Pages. Cross-domain redirects cannot be created in `_redirects`; use Bulk Redirects or the registrar redirect feature.
+
+If Cloudflare Pages says `Hostname 'tradiewebsites.com' already has externally managed DNS records`, delete any existing `A`, `AAAA`, or `CNAME` DNS records for `@` / `tradiewebsites.com` first, then add the Pages custom domain again. Do the same for `www` before attaching `www.tradiewebsites.com`.
 
 ## GitHub repo
 
