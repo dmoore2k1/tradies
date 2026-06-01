@@ -12,7 +12,7 @@ Recommended Cloudflare Pages settings for this repo.
 - Build output directory: `public`
 - Root directory: `/`
 
-Do not set the deploy command to `npx wrangler deploy`. That command deploys a Worker, not a Pages project, and fails or produces the wrong artifact. Cloudflare Pages should do the deployment itself from the `public` output directory and automatically register `functions/api/submit.js` as the Pages Function.
+This repo intentionally has no `wrangler.toml`. It should be deployed by Cloudflare Pages from GitHub, not by `wrangler deploy`. Cloudflare Pages should publish the `public` directory and automatically register `functions/api/submit.js` as the Pages Function.
 
 Do not use `/` as the build output directory when Pages Functions are enabled. If `/` is used as the output directory, Cloudflare can publish `functions/api/submit.js` as a static asset instead of registering it as a Pages Function, causing `/api/submit` to return 404.
 
