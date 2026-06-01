@@ -4,17 +4,20 @@ Recommended Cloudflare Pages settings for this repo.
 
 ## Project
 
-- Project name: `tradiewebsites`
-- Production branch: `main`
-- Framework preset: `None`
-- Build command: leave blank
-- Deploy command: leave blank / default Pages deployment
-- Build output directory: `public`
+Current Cloudflare setup is a Workers build, not a classic Pages build. The visible settings are:
+
+- Build command: `None`
+- Deploy command: `npx wrangler deploy`
+- Version command: `npx wrangler versions upload`
 - Root directory: `/`
 
-This repo intentionally has no `wrangler.toml`. It should be deployed by Cloudflare Pages from GitHub, not by `wrangler deploy`. Cloudflare Pages should publish the `public` directory and automatically register `functions/api/submit.js` as the Pages Function.
+This repo is now compatible with that setup:
 
-Do not use `/` as the build output directory when Pages Functions are enabled. If `/` is used as the output directory, Cloudflare can publish `functions/api/submit.js` as a static asset instead of registering it as a Pages Function, causing `/api/submit` to return 404.
+- `wrangler.toml` defines `src/index.js` as the Worker entry point.
+- `[assets] directory = "./public"` serves the static website from `public/`.
+- `src/index.js` handles `POST /api/submit` and serves static assets through `env.ASSETS`.
+
+Do not use `npx wrangler pages deploy` in this Worker build configuration. If switching back to classic Cloudflare Pages later, create/connect a separate Pages project and use build output directory `public`.
 
 ## Domains and redirects
 
