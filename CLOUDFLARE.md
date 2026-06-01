@@ -8,8 +8,11 @@ Recommended Cloudflare Pages settings for this repo.
 - Production branch: `main`
 - Framework preset: `None`
 - Build command: leave blank
+- Deploy command: leave blank / default Pages deployment
 - Build output directory: `public`
 - Root directory: `/`
+
+Do not set the deploy command to `npx wrangler deploy`. That command deploys a Worker, not a Pages project, and fails or produces the wrong artifact. Cloudflare Pages should do the deployment itself from the `public` output directory and automatically register `functions/api/submit.js` as the Pages Function.
 
 Do not use `/` as the build output directory when Pages Functions are enabled. If `/` is used as the output directory, Cloudflare can publish `functions/api/submit.js` as a static asset instead of registering it as a Pages Function, causing `/api/submit` to return 404.
 
