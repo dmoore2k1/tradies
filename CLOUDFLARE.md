@@ -8,8 +8,10 @@ Recommended Cloudflare Pages settings for this repo.
 - Production branch: `main`
 - Framework preset: `None`
 - Build command: leave blank
-- Build output directory: `/`
+- Build output directory: `public`
 - Root directory: `/`
+
+Do not use `/` as the build output directory when Pages Functions are enabled. If `/` is used as the output directory, Cloudflare can publish `functions/api/submit.js` as a static asset instead of registering it as a Pages Function, causing `/api/submit` to return 404.
 
 ## Domains and redirects
 
